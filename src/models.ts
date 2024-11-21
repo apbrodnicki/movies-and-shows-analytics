@@ -1,4 +1,35 @@
 export interface CsvRecord {
-	id: string,
-	value: string
+	description: string,
+	directors: string,
+	genres: string,
+	imdbRating: string,
+	votes: string,
+	originalTitle: string,
+	releaseDate: string,
+	runtime: string,
+	title: string,
+	type: string,
+	imdbUrl: string,
+	userRating: string
+}
+
+export interface ImdbCsvRecord {
+	Const: string,
+	Created: string,
+	'Date Rated': string,
+	Description: string,
+	Directors: string,
+	Genres: string,
+	'IMDb Rating': string,
+	Modified: string
+	'Num Votes': string,
+	'Original Title': string,
+	Position: string
+	'Release Date': string,
+	'Runtime (mins)': string,
+	Title: string,
+	'Title Type': string,
+	URL: string,
+	Year: string,
+	'Your Rating': string
 }
