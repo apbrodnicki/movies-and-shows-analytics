@@ -33,15 +33,15 @@ export const FileUpload = ({ setCsvRecords }: FileUploadProps): React.JSX.Elemen
 									description: rest.Description,
 									directors: rest.Directors,
 									genres: rest.Genres,
-									imdbRating: rest['IMDb Rating'],
-									votes: rest['Num Votes'],
+									imdbRating: +rest['IMDb Rating'],
+									votes: +rest['Num Votes'],
 									originalTitle: rest['Original Title'],
-									releaseDate: rest['Release Date'],
-									runtime: rest['Runtime (mins)'],
+									releaseDate: new Date(rest['Release Date']),
+									runtime: +rest['Runtime (mins)'],
 									title: rest.Title,
 									type: rest['Title Type'],
 									imdbUrl: rest.URL,
-									userRating: rest['Your Rating']
+									userRating: +rest['Your Rating']
 								};
 							});
 
