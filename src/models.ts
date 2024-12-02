@@ -4,7 +4,6 @@ export interface CsvRecord {
 	genres: string,
 	imdbRating: number,
 	votes: number,
-	originalTitle: string,
 	releaseDate: Date,
 	runtime: number,
 	title: string,

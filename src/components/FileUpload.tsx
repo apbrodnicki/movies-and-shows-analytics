@@ -26,6 +26,7 @@ export const FileUpload = ({ setCsvRecords }: FileUploadProps): React.JSX.Elemen
 						}
 
 						if (records !== undefined && isImdbCsvRecordArray(records)) {
+							// Filter out unused data and sort alphabetically
 							const filteredRecords = records.map((record: ImdbCsvRecord): CsvRecord => {
 								const { Const, Created, 'Date Rated': dateRated, Modified, Position, Year, ...rest } = record;
 
@@ -35,7 +36,6 @@ export const FileUpload = ({ setCsvRecords }: FileUploadProps): React.JSX.Elemen
 									genres: rest.Genres,
 									imdbRating: +rest['IMDb Rating'],
 									votes: +rest['Num Votes'],
-									originalTitle: rest['Original Title'],
 									releaseDate: new Date(rest['Release Date']),
 									runtime: +rest['Runtime (mins)'],
 									title: rest.Title,
@@ -43,7 +43,7 @@ export const FileUpload = ({ setCsvRecords }: FileUploadProps): React.JSX.Elemen
 									imdbUrl: rest.URL,
 									userRating: +rest['Your Rating']
 								};
-							});
+							}).sort((a, b) => a.title.toLowerCase().localeCompare(b.title.toLowerCase()));
 
 							setCsvRecords(filteredRecords);
 						} else {
@@ -55,7 +55,7 @@ export const FileUpload = ({ setCsvRecords }: FileUploadProps): React.JSX.Elemen
 
 			reader.readAsText(event.target.files[0]);
 		} else {
-			console.log('Please enter a .csv file.');
+			console.log('Make sure you entered a .csv file.');
 		}
 	};
 
