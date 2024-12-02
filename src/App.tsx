@@ -1,5 +1,5 @@
-import { Box } from '@mui/material';
 import { FileUpload } from 'components/FileUpload';
+import { UserRatingsChart } from 'components/UserRatingsChart';
 import type { CsvRecord } from 'models';
 import React, { useState } from 'react';
 
@@ -9,11 +9,7 @@ export const App = (): React.JSX.Element => {
 	return (
 		<>
 			<FileUpload setCsvRecords={setCsvRecords} />
-			{csvRecords.map((record, index) => (
-				<Box key={index}>
-					<Box>{record.title}</Box>
-				</Box>
-			))}
+			<UserRatingsChart records={csvRecords} />
 		</>
 	);
 };
