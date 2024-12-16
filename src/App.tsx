@@ -1,4 +1,5 @@
 import { FileUpload } from 'components/FileUpload';
+import { MoviesAndShowsDataGrid } from 'components/MoviesAndShowsDataGrid';
 import { UserRatingsChart } from 'components/UserRatingsChart';
 import type { CsvRecord } from 'models';
 import React, { useState } from 'react';
@@ -9,6 +10,7 @@ export const App = (): React.JSX.Element => {
 	return (
 		<>
 			<FileUpload setCsvRecords={setCsvRecords} />
+			<MoviesAndShowsDataGrid records={csvRecords} />
 			<UserRatingsChart records={csvRecords} />
 		</>
 	);
