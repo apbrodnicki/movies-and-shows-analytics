@@ -21,7 +21,7 @@ export const getDataGridColumns = (): GridColDef[] => ([
 		headerAlign: 'center',
 		flex: 1,
 		type: 'number',
-		renderCell: (param) => <Typography>{param.value}</Typography>
+		renderCell: (param) => <Typography>{param.value !== 0 ? param.value : 'Unrated'}</Typography>
 	},
 	{
 		field: 'imdbRating',
@@ -64,7 +64,7 @@ export const getDataGridColumns = (): GridColDef[] => ([
 		align: 'center',
 		headerAlign: 'center',
 		flex: 1,
-		renderCell: (param) => <Typography>{param.value}</Typography>
+		renderCell: (param) => <Typography>{param.value !== '' ? param.value : 'Unknown'}</Typography>
 	},
 	{
 		field: 'genres',
@@ -101,7 +101,6 @@ export const getDataGridColumns = (): GridColDef[] => ([
 				const minutes = param.value % 60;
 				runtime = `${hours} hour${hours > 1 ? 's' : ''} and ${minutes} minute${minutes > 1 ? 's' : ''}`;
 			}
-
 
 			return (
 				<Typography>{runtime}</Typography>
