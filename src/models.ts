@@ -1,5 +1,4 @@
 export interface CsvRecord {
-	description: string,
 	directors: string,
 	genres: string,
 	imdbRating: number,

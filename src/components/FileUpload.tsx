@@ -1,7 +1,7 @@
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import { Button, Typography } from '@mui/material';
 import { parse, type CsvError, type Info } from 'csv-parse/browser/esm';
-import { isImdbCsvRecordArray } from 'helper';
+import { isImdbCsvRecordArray } from 'helper/helper';
 import type { CsvRecord, ImdbCsvRecord } from 'models';
 import React, { type ChangeEvent } from 'react';
 
@@ -31,7 +31,6 @@ export const FileUpload = ({ setCsvRecords }: FileUploadProps): React.JSX.Elemen
 								const { Const, Created, 'Date Rated': dateRated, Modified, Position, Year, ...rest } = record;
 
 								return {
-									description: rest.Description,
 									directors: rest.Directors,
 									genres: rest.Genres,
 									imdbRating: +rest['IMDb Rating'],
