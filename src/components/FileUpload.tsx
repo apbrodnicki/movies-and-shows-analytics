@@ -27,22 +27,18 @@ export const FileUpload = ({ setCsvRecords }: FileUploadProps): React.JSX.Elemen
 
 						if (records !== undefined && isImdbCsvRecordArray(records)) {
 							// Filter out unused data and sort alphabetically
-							const filteredRecords = records.map((record: ImdbCsvRecord): CsvRecord => {
-								const { Const, Created, 'Date Rated': dateRated, Modified, Position, Year, ...rest } = record;
-
-								return {
-									directors: rest.Directors,
-									genres: rest.Genres,
-									imdbRating: +rest['IMDb Rating'],
-									votes: +rest['Num Votes'],
-									releaseDate: new Date(rest['Release Date']),
-									runtime: +rest['Runtime (mins)'],
-									title: rest.Title,
-									type: rest['Title Type'],
-									imdbUrl: rest.URL,
-									userRating: +rest['Your Rating']
-								};
-							}).sort((a, b) => a.title.toLowerCase().localeCompare(b.title.toLowerCase()));
+							const filteredRecords = records.map((record: ImdbCsvRecord): CsvRecord => ({
+								directors: record.Directors,
+								genres: record.Genres,
+								imdbRating: +record['IMDb Rating'],
+								votes: +record['Num Votes'],
+								releaseDate: new Date(record['Release Date']),
+								runtime: +record['Runtime (mins)'],
+								title: record.Title,
+								type: record['Title Type'],
+								imdbUrl: record.URL,
+								userRating: +record['Your Rating']
+							})).sort((a, b) => a.title.toLowerCase().localeCompare(b.title.toLowerCase()));
 
 							setCsvRecords(filteredRecords);
 						} else {
