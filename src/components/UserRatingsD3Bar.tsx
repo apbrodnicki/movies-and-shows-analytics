@@ -2,16 +2,16 @@ import * as d3 from 'd3';
 import type { CsvRecord } from 'models';
 import React, { useEffect, useRef } from 'react';
 
-interface UserRatingsChartProps {
+interface UserRatingsD3BarProps {
 	records: CsvRecord[];
 }
 
-export const UserRatingsChart = ({ records }: UserRatingsChartProps): React.JSX.Element => {
-	const userRatingsChartRef = useRef<SVGSVGElement | null>(null);
+export const UserRatingsD3Bar = ({ records }: UserRatingsD3BarProps): React.JSX.Element => {
+	const userRatingsD3BarRef = useRef<SVGSVGElement | null>(null);
 
 	useEffect(() => {
-		if ((userRatingsChartRef.current !== null) && records.length > 0) {
-			d3.select(userRatingsChartRef.current).selectAll('*').remove();
+		if ((userRatingsD3BarRef.current !== null) && records.length > 0) {
+			d3.select(userRatingsD3BarRef.current).selectAll('*').remove();
 
 			const barWidth = 50;
 			const width = Math.max(records.length * barWidth, 800);
@@ -19,7 +19,7 @@ export const UserRatingsChart = ({ records }: UserRatingsChartProps): React.JSX.
 			const margin = { top: 50, right: 50, bottom: 350, left: 50 };
 
 			const svg = d3
-				.select(userRatingsChartRef.current)
+				.select(userRatingsD3BarRef.current)
 				.attr('width', width)
 				.attr('height', height)
 				.append('g');
@@ -76,6 +76,6 @@ export const UserRatingsChart = ({ records }: UserRatingsChartProps): React.JSX.
 	}, [records]);
 
 	return (
-		<svg ref={userRatingsChartRef} />
+		<svg ref={userRatingsD3BarRef} />
 	);
 };
