@@ -21,6 +21,7 @@ export const getDataGridColumns = (): GridColDef[] => ([
 		headerAlign: 'center',
 		flex: 1,
 		type: 'number',
+		cellClassName: (param) => `rating-cell-${param.value !== 0 ? param.value : '0'}`,
 		renderCell: (param) => <Typography>{param.value !== 0 ? param.value : 'Unrated'}</Typography>
 	},
 	{
@@ -30,6 +31,7 @@ export const getDataGridColumns = (): GridColDef[] => ([
 		headerAlign: 'center',
 		flex: 1,
 		type: 'number',
+		cellClassName: (param) => `rating-cell-${param.value !== 0 ? Math.floor(param.value as number) : '0'}`,
 		renderCell: (param) => <Typography>{param.value}</Typography>
 	},
 	{
