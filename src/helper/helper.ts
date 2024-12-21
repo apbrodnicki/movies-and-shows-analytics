@@ -1,4 +1,4 @@
-import type { CsvRecord, ImdbCsvRecord, RatingsVotesScatterPoint } from 'models';
+import type { CsvRecord, ImdbCsvRecord, PieSlice, RatingsOccurrences, RatingsVotesScatterPoint } from 'models';
 
 export const isImdbCsvRecordArray = (records: unknown): records is ImdbCsvRecord[] => {
 	if (!Array.isArray(records)) {
@@ -57,3 +57,24 @@ export const filterCsvRecordsForScatter = (records: CsvRecord[]): RatingsVotesSc
 );
 
 export const formatRecordType = (phrase: string): string => phrase.toLocaleLowerCase().replaceAll(' ', '-');
+
+export const filterCsvRecordsForPie = (records: CsvRecord[]): PieSlice[] => {
+	const occurrences: RatingsOccurrences = { 0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0 };
+	const pie: PieSlice[] = [];
+
+	const ratings = records.map((record) => record.userRating);
+
+	for (const rating of ratings) {
+		occurrences[rating as keyof RatingsOccurrences] = occurrences[rating as keyof RatingsOccurrences] + 1;
+	}
+
+	for (const occurrence in occurrences) {
+		pie.push({
+			id: occurrence,
+			value: occurrences[occurrence as unknown as keyof RatingsOccurrences],
+			label: occurrence !== '0' ? `${occurrence} / 10` : 'Unrated'
+		});
+	}
+
+	return pie;
+};
