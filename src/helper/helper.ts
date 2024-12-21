@@ -1,4 +1,4 @@
-import type { ImdbCsvRecord } from 'models';
+import type { CsvRecord, ImdbCsvRecord, RatingsVotesScatterPoint } from 'models';
 
 export const isImdbCsvRecordArray = (records: unknown): records is ImdbCsvRecord[] => {
 	if (!Array.isArray(records)) {
@@ -46,3 +46,12 @@ export const isImdbCsvRecordArray = (records: unknown): records is ImdbCsvRecord
 		typeof (record as ImdbCsvRecord)['Your Rating'] === 'string'
 	));
 };
+
+export const filterCsvRecordsForScatter = (records: CsvRecord[]): RatingsVotesScatterPoint[] => (
+	records.map((record, index) => ({
+		id: index,
+		imdbRating: record.imdbRating,
+		votes: record.votes,
+		userRating: record.userRating,
+	}))
+);

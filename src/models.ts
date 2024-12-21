@@ -31,3 +31,11 @@ export interface ImdbCsvRecord {
 	Year: string,
 	'Your Rating': string
 }
+
+export interface RatingsVotesScatterPoint {
+	id: number,
+	imdbRating: number,
+	votes: number,
+	userRating: number,
+	[key: string]: string | number | Date | null | undefined
+}
