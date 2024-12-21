@@ -1,5 +1,6 @@
 import { DataGrid } from '@mui/x-data-grid';
 import { getDataGridColumns } from 'helper/getDataGridColumns';
+import { formatRecordType } from 'helper/helper';
 import type { CsvRecord } from 'models';
 import React from 'react';
 
@@ -13,20 +14,15 @@ export const MoviesAndShowsDataGrid = ({ records }: MoviesAndShowsDataGridProps)
 		rows={records}
 		getRowId={(row: CsvRecord) => `${row.title} ${row.imdbUrl}`}
 		getRowHeight={() => 'auto'}
-		getRowClassName={(params) => params.indexRelativeToCurrentPage % 2 === 0 ? 'even-row' : 'odd-row'}
+		getRowClassName={(params) => `${formatRecordType(params.row.type)}-row`}
 		showCellVerticalBorder
 		sx={{
 			height: '600px',
 			'& .MuiDataGrid-cell': {
 				display: 'flex',
-				alignItems: 'center'
-			},
-			// '& .even-row': {
-			// 	backgroundColor: 'gray'
-			// },
-			// '& .odd-row': {
-			// 	backgroundColor: 'light gray'
-			// }
+				alignItems: 'center',
+				padding: '16px'
+			}
 		}}
 	/>
 );

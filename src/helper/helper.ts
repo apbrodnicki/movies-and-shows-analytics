@@ -55,3 +55,5 @@ export const filterCsvRecordsForScatter = (records: CsvRecord[]): RatingsVotesSc
 		userRating: record.userRating,
 	}))
 );
+
+export const formatRecordType = (phrase: string): string => phrase.toLocaleLowerCase().replaceAll(' ', '-');
