@@ -9,7 +9,7 @@ export const getDataGridColumns = (): GridColDef[] => ([
 		align: 'center',
 		headerAlign: 'center',
 		flex: 1,
-		renderCell: (param) => (
+		renderCell: (param: GridRenderCellParams<CsvRecord, string>) => (
 			<Link href={param.row.imdbUrl} target='_blank'>
 				<Typography>{param.value}</Typography>
 			</Link>
@@ -23,7 +23,7 @@ export const getDataGridColumns = (): GridColDef[] => ([
 		flex: 1,
 		type: 'number',
 		cellClassName: (param) => `rating-cell-${param.value !== 0 ? param.value : '0'}`,
-		renderCell: (param) => <Typography>{param.value !== 0 ? param.value : 'Unrated'}</Typography>
+		renderCell: (param: GridRenderCellParams<CsvRecord, number>) => <Typography>{param.value !== 0 ? param.value : 'Unrated'}</Typography>
 	},
 	{
 		field: 'imdbRating',
@@ -33,7 +33,7 @@ export const getDataGridColumns = (): GridColDef[] => ([
 		flex: 1,
 		type: 'number',
 		cellClassName: (param) => `rating-cell-${param.value !== 0 ? Math.floor(param.value as number) : '0'}`,
-		renderCell: (param) => <Typography>{param.value}</Typography>
+		renderCell: (param: GridRenderCellParams<CsvRecord, number>) => <Typography>{param.value}</Typography>
 	},
 	{
 		field: 'votes',
@@ -42,7 +42,7 @@ export const getDataGridColumns = (): GridColDef[] => ([
 		headerAlign: 'center',
 		flex: 1,
 		type: 'number',
-		renderCell: (param) => <Typography>{param.value.toLocaleString()}</Typography>
+		renderCell: (param: GridRenderCellParams<CsvRecord, number>) => <Typography>{param.value !== undefined ? param.value.toLocaleString() : 'Unknown'}</Typography>
 	},
 	{
 		field: 'releaseDate',
@@ -69,7 +69,7 @@ export const getDataGridColumns = (): GridColDef[] => ([
 		align: 'center',
 		headerAlign: 'center',
 		flex: 1,
-		renderCell: (param) => <Typography>{param.value}</Typography>
+		renderCell: (param: GridRenderCellParams<CsvRecord, string>) => <Typography>{param.value}</Typography>
 	},
 	{
 		field: 'directors',
@@ -77,7 +77,7 @@ export const getDataGridColumns = (): GridColDef[] => ([
 		align: 'center',
 		headerAlign: 'center',
 		flex: 1,
-		renderCell: (param) => <Typography>{param.value !== '' ? param.value : 'Unknown'}</Typography>
+		renderCell: (param: GridRenderCellParams<CsvRecord, string>) => <Typography>{param.value !== '' ? param.value : 'Unknown'}</Typography>
 	},
 	{
 		field: 'genres',
@@ -85,7 +85,7 @@ export const getDataGridColumns = (): GridColDef[] => ([
 		align: 'center',
 		headerAlign: 'center',
 		flex: 1,
-		renderCell: (param) => <Typography>{param.value}</Typography>
+		renderCell: (param: GridRenderCellParams<CsvRecord, string>) => <Typography>{param.value}</Typography>
 	},
 	{
 		field: 'runtime',
@@ -94,30 +94,24 @@ export const getDataGridColumns = (): GridColDef[] => ([
 		headerAlign: 'center',
 		flex: 1,
 		type: 'number',
-		renderCell: (param) => {
-			let runtime = '';
-
-			if (param.value === 0) {
-				runtime = 'Unknown';
+		renderCell: (param: GridRenderCellParams<CsvRecord, number>) => {
+			if (param.value === undefined || param.value === 0) {
+				return <Typography>Unknown</Typography>;
 			}
 
 			if (param.value > 0 && param.value < 60) {
-				runtime = `${param.value} minutes`;
+				return <Typography>{param.value} minutes</Typography>;
 			}
 
 			if (param.value === 60) {
-				runtime = '1 hour';
+				return '1 hour';
 			}
 
 			if (param.value > 60) {
 				const hours = Math.floor(param.value / 60);
 				const minutes = param.value % 60;
-				runtime = `${hours} hour${hours > 1 ? 's' : ''} and ${minutes} minute${minutes > 1 ? 's' : ''}`;
+				return <Typography>{hours} hour{hours > 1 ? 's' : ''} and {minutes} minute{minutes > 1 ? 's' : ''}</Typography>;
 			}
-
-			return (
-				<Typography>{runtime}</Typography>
-			);
 		}
 	}
 ]);
