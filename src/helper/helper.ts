@@ -56,7 +56,7 @@ export const filterCsvRecordsForScatter = (records: CsvRecord[]): RatingsVotesSc
 	}))
 );
 
-export const formatRecordType = (phrase: string): string => phrase.toLocaleLowerCase().replaceAll(' ', '-');
+export const getDataGridRowClass = (row: CsvRecord): string => row.type.toLocaleLowerCase().replaceAll(' ', '-');
 
 export const filterCsvRecordsForPie = (records: CsvRecord[]): PieSlice[] => {
 	const occurrences: RatingsOccurrences = { 0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0 };

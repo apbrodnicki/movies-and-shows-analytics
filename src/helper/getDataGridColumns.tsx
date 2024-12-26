@@ -50,7 +50,7 @@ export const getDataGridColumns = (): GridColDef[] => ([
 		headerAlign: 'center',
 		flex: 1,
 		type: 'date',
-		renderCell: (param) => <Typography>{param.value.getFullYear()}</Typography>
+		renderCell: (param) => <Typography>{param.value.toLocaleString('default', { year: 'numeric', month: 'long' })}</Typography>
 	},
 	{
 		field: 'type',
