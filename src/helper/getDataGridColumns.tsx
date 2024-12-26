@@ -1,5 +1,6 @@
 import { Link, Typography } from '@mui/material';
-import type { GridColDef } from '@mui/x-data-grid';
+import type { GridColDef, GridRenderCellParams } from '@mui/x-data-grid';
+import type { CsvRecord } from 'models';
 
 export const getDataGridColumns = (): GridColDef[] => ([
 	{
@@ -50,7 +51,17 @@ export const getDataGridColumns = (): GridColDef[] => ([
 		headerAlign: 'center',
 		flex: 1,
 		type: 'date',
-		renderCell: (param) => <Typography>{param.value.toLocaleString('default', { year: 'numeric', month: 'long' })}</Typography>
+		renderCell: (param: GridRenderCellParams<CsvRecord, Date>) => {
+			if (param.value !== undefined) {
+				if (param.value.getFullYear() === new Date().getFullYear() || param.value.getFullYear() === new Date().getFullYear() - 1) {
+					return <Typography>{param.value.toLocaleString('default', { year: 'numeric', month: 'long' }).trim().replace(' ', ', ')}</Typography>;
+				}
+
+				return <Typography>{param.value.getFullYear()}</Typography>;
+			}
+
+			return <Typography>Unknown</Typography>;
+		}
 	},
 	{
 		field: 'type',
