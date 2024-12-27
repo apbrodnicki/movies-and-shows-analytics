@@ -10,7 +10,7 @@ export const getDataGridColumns = (): GridColDef[] => ([
 		headerAlign: 'center',
 		flex: 1,
 		renderCell: (param: GridRenderCellParams<CsvRecord, string>) => (
-			<Link href={param.row.imdbUrl} target='_blank'>
+			<Link href={param.row.imdbUrl} target='_blank' color='#000000'>
 				<Typography>{param.value}</Typography>
 			</Link>
 		)
@@ -100,18 +100,14 @@ export const getDataGridColumns = (): GridColDef[] => ([
 			}
 
 			if (param.value > 0 && param.value < 60) {
-				return <Typography>{param.value} minutes</Typography>;
+				return <Typography>{param.value} minute{param.value > 1 ? 's' : ''}</Typography>;
 			}
 
-			if (param.value === 60) {
-				return '1 hour';
-			}
-
-			if (param.value > 60) {
+			if (param.value >= 60) {
 				const hours = Math.floor(param.value / 60);
 				const minutes = param.value % 60;
 
-				return <Typography>{hours} hour{hours > 1 ? 's' : ''} and {minutes} minute{minutes > 1 ? 's' : ''}</Typography>;
+				return <Typography>{hours} hour{hours > 1 ? 's' : ''}{minutes > 0 ? ` and ${minutes} minute${minutes > 1 ? 's' : ''}` : ''}</Typography>;
 			}
 		}
 	}
