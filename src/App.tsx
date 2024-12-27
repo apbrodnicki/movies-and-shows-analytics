@@ -3,10 +3,10 @@ import { MoviesAndShowsDataGrid } from 'components/MoviesAndShowsDataGrid';
 import { RatingsVotesScatter } from 'components/charts/RatingsVotesScatter';
 import { UserRatingsD3Bar } from 'components/charts/UserRatingsD3Bar';
 import { UserRatingsPie } from 'components/charts/UserRatingsPie';
+import 'css/RatingCell.css';
+import 'css/RecordType.css';
 import type { CsvRecord } from 'models';
 import React, { useState } from 'react';
-import './RatingCell.css';
-import './RecordType.css';
 
 export const App = (): React.JSX.Element => {
 	const [csvRecords, setCsvRecords] = useState<CsvRecord[]>([]);
