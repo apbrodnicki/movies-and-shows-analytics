@@ -28,8 +28,8 @@ export const FileUpload = ({ setCsvRecords }: FileUploadProps): React.JSX.Elemen
 						if (records !== undefined && isImdbCsvRecordArray(records)) {
 							// Filter out unused data and sort alphabetically
 							const filteredRecords = records.map((record: ImdbCsvRecord): CsvRecord => ({
-								directors: record.Directors,
-								genres: record.Genres,
+								directors: record.Directors.length > 0 ? record.Directors.split(',') : [],
+								genres: record.Genres.length > 0 ? record.Genres.split(',') : [],
 								imdbRating: +record['IMDb Rating'],
 								votes: +record['Num Votes'],
 								releaseDate: new Date(record['Release Date']),

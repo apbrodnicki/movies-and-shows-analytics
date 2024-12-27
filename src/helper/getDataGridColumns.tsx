@@ -77,7 +77,7 @@ export const getDataGridColumns = (): GridColDef[] => ([
 		align: 'center',
 		headerAlign: 'center',
 		flex: 1,
-		renderCell: (param: GridRenderCellParams<CsvRecord, string>) => <Typography>{param.value !== '' ? param.value : 'Unknown'}</Typography>
+		renderCell: (param: GridRenderCellParams<CsvRecord, string[]>) => <Typography>{(param.value?.length ?? 0) > 0 ? param.value?.join(',') : 'Unknown'}</Typography>
 	},
 	{
 		field: 'genres',
@@ -85,7 +85,7 @@ export const getDataGridColumns = (): GridColDef[] => ([
 		align: 'center',
 		headerAlign: 'center',
 		flex: 1,
-		renderCell: (param: GridRenderCellParams<CsvRecord, string>) => <Typography>{param.value}</Typography>
+		renderCell: (param: GridRenderCellParams<CsvRecord, string[]>) => <Typography>{(param.value?.length ?? 0) > 0 ? param.value?.join(',') : 'Unknown'}</Typography>
 	},
 	{
 		field: 'runtime',
@@ -110,6 +110,7 @@ export const getDataGridColumns = (): GridColDef[] => ([
 			if (param.value > 60) {
 				const hours = Math.floor(param.value / 60);
 				const minutes = param.value % 60;
+
 				return <Typography>{hours} hour{hours > 1 ? 's' : ''} and {minutes} minute{minutes > 1 ? 's' : ''}</Typography>;
 			}
 		}
