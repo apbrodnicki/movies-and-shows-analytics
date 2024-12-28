@@ -1,4 +1,4 @@
-import type { CsvRecord, ImdbCsvRecord, PieSlice, RatingsOccurrences, RatingsVotesScatterPoint } from 'models';
+import type { CsvRecord, ImdbCsvRecord, PieSlice, RatingAverage, RatingsOccurrences, RatingsVotesScatterPoint } from 'models';
 
 export const isImdbCsvRecordArray = (records: unknown): records is ImdbCsvRecord[] => {
 	if (!Array.isArray(records)) {
@@ -78,3 +78,8 @@ export const filterCsvRecordsForPie = (records: CsvRecord[]): PieSlice[] => {
 
 	return pie;
 };
+
+export const getRatingAverage = (records: CsvRecord[]): RatingAverage => ({
+	imdbAverage: records.reduce((accumulator, record) => accumulator + record.imdbRating, 0) / records.length,
+	userAverage: records.reduce((accumulator, record) => accumulator + record.userRating, 0) / records.length
+});

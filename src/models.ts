@@ -59,3 +59,8 @@ export interface PieSlice {
 	value: number,
 	label: string
 }
+
+export interface RatingAverage {
+	imdbAverage: number,
+	userAverage: number
+}
