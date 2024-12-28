@@ -1,4 +1,4 @@
-import { Link, Typography } from '@mui/material';
+import { Box, Link, Typography } from '@mui/material';
 import type { GridColDef, GridRenderCellParams } from '@mui/x-data-grid';
 import type { CsvRecord } from 'models';
 
@@ -107,7 +107,12 @@ export const getDataGridColumns = (): GridColDef[] => ([
 				const hours = Math.floor(param.value / 60);
 				const minutes = param.value % 60;
 
-				return <Typography>{hours} hour{hours > 1 ? 's' : ''}{minutes > 0 ? ` and ${minutes} minute${minutes > 1 ? 's' : ''}` : ''}</Typography>;
+				return (
+					<Box>
+						<Typography>{`${hours} hour${hours > 1 ? 's' : ''}`}</Typography>
+						<Typography>{minutes > 0 ? `${minutes} minute${minutes > 1 ? 's' : ''}` : ''}</Typography>
+					</Box>
+				);
 			}
 		}
 	}
