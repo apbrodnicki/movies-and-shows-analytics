@@ -79,7 +79,30 @@ export const filterCsvRecordsForPie = (records: CsvRecord[]): PieSlice[] => {
 	return pie;
 };
 
-export const getRatingAverage = (records: CsvRecord[]): RatingAverage => ({
-	imdbAverage: records.reduce((accumulator, record) => accumulator + record.imdbRating, 0) / records.length,
-	userAverage: records.reduce((accumulator, record) => accumulator + record.userRating, 0) / records.length
-});
+export const getRatingAverage = (records: CsvRecord[]): RatingAverage => {
+	const recordsToSkip: string[] = [];
+
+	const userTotal = records.reduce((accumulator, record) => {
+		if (record.userRating === 0) {
+			recordsToSkip.push(record.title);
+
+			return accumulator;
+		}
+
+		return accumulator + record.userRating;
+	}, 0);
+
+	const imdbTotal = records.reduce((accumulator, record) => {
+		if (recordsToSkip.includes(record.title)) {
+			return accumulator;
+		}
+
+		return accumulator + record.imdbRating;
+	}, 0);
+
+	return {
+		imdbAverage: imdbTotal / (records.length - recordsToSkip.length),
+		totalImdbAverage: records.reduce((accumulator, record) => accumulator + record.imdbRating, 0) / records.length,
+		userAverage: userTotal / (records.length - recordsToSkip.length)
+	};
+};

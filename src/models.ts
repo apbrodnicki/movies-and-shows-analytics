@@ -62,5 +62,6 @@ export interface PieSlice {
 
 export interface RatingAverage {
 	imdbAverage: number,
+	totalImdbAverage: number,
 	userAverage: number
 }

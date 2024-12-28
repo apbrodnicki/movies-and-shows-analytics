@@ -16,11 +16,15 @@ export const App = (): React.JSX.Element => {
 	return (
 		<>
 			<FileUpload setCsvRecords={setCsvRecords} />
-			<MoviesAndShowsDataGrid records={csvRecords} />
-			{csvRecords.length > 0 && <RatingsGauge records={csvRecords} />}
-			<RatingsVotesScatter records={csvRecords} />
-			<UserRatingsPie records={csvRecords} />
-			<UserRatingsD3Bar records={csvRecords} />
+			{csvRecords.length > 0 && (
+				<>
+					<MoviesAndShowsDataGrid records={csvRecords} />
+					<RatingsGauge records={csvRecords} />
+					<RatingsVotesScatter records={csvRecords} />
+					<UserRatingsPie records={csvRecords} />
+					<UserRatingsD3Bar records={csvRecords} />
+				</>
+			)}
 		</>
 	);
 };
