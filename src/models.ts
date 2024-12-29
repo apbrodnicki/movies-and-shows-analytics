@@ -65,3 +65,30 @@ export interface RatingAverage {
 	totalImdbAverage: number,
 	userAverage: number
 }
+
+export interface GenreFrequency {
+	Action?: number,
+	Adventure?: number,
+	Animation?: number,
+	Biography?: number,
+	Comedy?: number,
+	Crime?: number,
+	Documentary?: number,
+	Drama?: number,
+	Family?: number,
+	Fantasy?: number,
+	'Game-Show'?: number,
+	History?: number,
+	Horror?: number,
+	Music?: number,
+	Musical?: number,
+	Mystery?: number,
+	'Reality-TV'?: number,
+	Romance?: number,
+	'Sci-Fi'?: number,
+	Short?: number,
+	Sport?: number,
+	Thriller?: number,
+	War?: number,
+	Western?: number
+}

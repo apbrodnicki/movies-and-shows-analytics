@@ -1,4 +1,4 @@
-import type { CsvRecord, ImdbCsvRecord, PieSlice, RatingAverage, RatingsOccurrences, RatingsVotesScatterPoint } from 'models';
+import type { CsvRecord, GenreFrequency, ImdbCsvRecord, PieSlice, RatingAverage, RatingsOccurrences, RatingsVotesScatterPoint } from 'models';
 
 export const isImdbCsvRecordArray = (records: unknown): records is ImdbCsvRecord[] => {
 	if (!Array.isArray(records)) {
@@ -105,4 +105,17 @@ export const getRatingAverage = (records: CsvRecord[]): RatingAverage => {
 		totalImdbAverage: records.reduce((accumulator, record) => accumulator + record.imdbRating, 0) / records.length,
 		userAverage: userTotal / (records.length - recordsToSkip.length)
 	};
+};
+
+export const getGenreFrequency = (records: CsvRecord[]): GenreFrequency => {
+	const genreFrequency: GenreFrequency = {};
+	for (const record of records) {
+		for (const genre of record.genres) {
+			const imdbGenre = genre.trim() as keyof GenreFrequency;
+
+			genreFrequency[imdbGenre] = genreFrequency[imdbGenre] !== undefined ? genreFrequency[imdbGenre] + 1 : 1;
+		}
+	}
+
+	return genreFrequency;
 };

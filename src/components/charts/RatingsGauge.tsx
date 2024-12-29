@@ -1,4 +1,4 @@
-import { Box, Typography } from '@mui/material';
+import { Box, FormControlLabel, FormGroup, Switch, Typography } from '@mui/material';
 import { Gauge } from '@mui/x-charts';
 import { getRatingAverage } from 'helper/helper';
 import type { CsvRecord } from 'models';
@@ -10,7 +10,6 @@ interface RatingsGaugeProps {
 
 export const RatingsGauge = ({ records }: RatingsGaugeProps): React.JSX.Element => {
 	const [showTotalImdbAverage, setShowTotalImdbAverage] = useState<boolean>(false);
-	// add radio button to toggle between total and reg imdb avg
 
 	const ratingAverage = getRatingAverage(records);
 
@@ -18,6 +17,9 @@ export const RatingsGauge = ({ records }: RatingsGaugeProps): React.JSX.Element 
 		<Box display='flex' justifyContent='center'>
 			<Box display='flex' flexDirection='column' alignItems='center'>
 				<Typography>IMDB Average</Typography>
+				<FormGroup>
+					<FormControlLabel control={<Switch onChange={() => { setShowTotalImdbAverage(!showTotalImdbAverage); }} />} label='Include unrated titles' />
+				</FormGroup>
 				<Gauge
 					value={showTotalImdbAverage ? ratingAverage.totalImdbAverage * 10 : ratingAverage.imdbAverage * 10}
 					startAngle={-100}
