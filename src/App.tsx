@@ -1,8 +1,9 @@
 import { FileUpload } from 'components/FileUpload';
 import { MoviesAndShowsDataGrid } from 'components/MoviesAndShowsDataGrid';
+import { GenresBar } from 'components/charts/GenresBar';
 import { RatingsGauge } from 'components/charts/RatingsGauge';
 import { RatingsVotesScatter } from 'components/charts/RatingsVotesScatter';
-import { UserRatingsD3Bar } from 'components/charts/UserRatingsD3Bar';
+// import { UserRatingsD3Bar } from 'components/charts/UserRatingsD3Bar';
 import { UserRatingsPie } from 'components/charts/UserRatingsPie';
 import 'css/App.css';
 import 'css/RatingCell.css';
@@ -19,10 +20,11 @@ export const App = (): React.JSX.Element => {
 			{csvRecords.length > 0 && (
 				<>
 					<MoviesAndShowsDataGrid records={csvRecords} />
+					<GenresBar records={csvRecords} />
 					<RatingsGauge records={csvRecords} />
 					<RatingsVotesScatter records={csvRecords} />
 					<UserRatingsPie records={csvRecords} />
-					<UserRatingsD3Bar records={csvRecords} />
+					{/* <UserRatingsD3Bar records={csvRecords} /> */}
 				</>
 			)}
 		</>

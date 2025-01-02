@@ -109,6 +109,7 @@ export const getRatingAverage = (records: CsvRecord[]): RatingAverage => {
 
 export const getGenreFrequency = (records: CsvRecord[]): GenreFrequency => {
 	const genreFrequency: GenreFrequency = {};
+
 	for (const record of records) {
 		for (const genre of record.genres) {
 			const imdbGenre = genre.trim() as keyof GenreFrequency;
@@ -117,5 +118,10 @@ export const getGenreFrequency = (records: CsvRecord[]): GenreFrequency => {
 		}
 	}
 
-	return genreFrequency;
+	// Sort GenreFrequency object alphabetically
+	return Object.keys(genreFrequency).sort().reduce((accumulator: GenreFrequency, genreKey) => {
+		accumulator[genreKey as keyof GenreFrequency] = genreFrequency[genreKey as keyof GenreFrequency];
+
+		return accumulator;
+	}, {});
 };
