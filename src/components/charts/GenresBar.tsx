@@ -13,9 +13,12 @@ export const GenresBar = ({ records }: GenresBarProps): React.JSX.Element => {
 	return (
 		<BarChart
 			series={[{ data: Object.values(genreFrequency) }]}
-			xAxis={[{ scaleType: 'band', data: Object.keys(genreFrequency) }]}
+			xAxis={[{
+				scaleType: 'band',
+				data: Object.keys(genreFrequency)
+			}]}
 			height={400}
-			width={800}
+			width={1800}
 		/>
 	);
 };
