@@ -68,6 +68,7 @@ export interface RatingAverage {
 
 export interface GenreFrequency {
 	Action?: number,
+	Adult?: number,
 	Adventure?: number,
 	Animation?: number,
 	Biography?: number,
@@ -77,17 +78,20 @@ export interface GenreFrequency {
 	Drama?: number,
 	Family?: number,
 	Fantasy?: number,
+	'Film-Noir'?: number,
 	'Game-Show'?: number,
 	History?: number,
 	Horror?: number,
 	Music?: number,
 	Musical?: number,
 	Mystery?: number,
+	News?: number,
 	'Reality-TV'?: number,
 	Romance?: number,
 	'Sci-Fi'?: number,
 	Short?: number,
 	Sport?: number,
+	'Talk-Show'?: number,
 	Thriller?: number,
 	War?: number,
 	Western?: number
