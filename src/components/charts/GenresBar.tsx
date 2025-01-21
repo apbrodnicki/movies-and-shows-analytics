@@ -1,6 +1,6 @@
 import { BarChart } from '@mui/x-charts';
 import { getGenreFrequency } from 'helper/helper';
-import type { CsvRecord } from 'models';
+import type { CsvRecord } from 'models/models';
 import React from 'react';
 
 interface GenresBarProps {

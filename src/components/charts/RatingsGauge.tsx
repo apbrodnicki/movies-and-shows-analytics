@@ -1,7 +1,7 @@
 import { Box, FormControlLabel, FormGroup, Switch, Typography } from '@mui/material';
 import { Gauge } from '@mui/x-charts';
 import { getRatingAverage } from 'helper/helper';
-import type { CsvRecord } from 'models';
+import type { CsvRecord } from 'models/models';
 import React, { useState } from 'react';
 
 interface RatingsGaugeProps {

@@ -1,7 +1,7 @@
 import { DataGrid } from '@mui/x-data-grid';
 import { getDataGridColumns } from 'helper/getDataGridColumns';
 import { getDataGridRowClassName } from 'helper/helper';
-import type { CsvRecord } from 'models';
+import type { CsvRecord } from 'models/models';
 import React from 'react';
 
 interface MoviesAndShowsDataGridProps {

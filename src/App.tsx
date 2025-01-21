@@ -8,7 +8,7 @@ import { UserRatingsPie } from 'components/charts/UserRatingsPie';
 import 'css/App.css';
 import 'css/RatingCell.css';
 import 'css/RecordType.css';
-import type { CsvRecord } from 'models';
+import type { CsvRecord } from 'models/models';
 import React, { useState } from 'react';
 
 export const App = (): React.JSX.Element => {

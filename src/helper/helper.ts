@@ -1,4 +1,5 @@
-import type { CsvRecord, GenreFrequency, ImdbCsvRecord, PieSlice, RatingAverage, RatingsOccurrences, RatingsVotesScatterPoint } from 'models';
+import type { PieSlice, RatingAverage, RatingsVotesScatterPoint } from 'models/chartModels';
+import type { CsvRecord, GenreFrequency, ImdbCsvRecord, RatingsOccurrences } from 'models/models';
 
 export const isImdbCsvRecordArray = (records: unknown): records is ImdbCsvRecord[] => {
 	if (!Array.isArray(records)) {

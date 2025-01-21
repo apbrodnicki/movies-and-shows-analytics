@@ -2,7 +2,7 @@ import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import { Button, Typography } from '@mui/material';
 import { parse, type CsvError, type Info } from 'csv-parse/browser/esm';
 import { isImdbCsvRecordArray } from 'helper/helper';
-import type { CsvRecord, ImdbCsvRecord } from 'models';
+import type { CsvRecord, Genre, ImdbCsvRecord, Rating } from 'models/models';
 import React, { type ChangeEvent } from 'react';
 
 interface FileUploadProps {
@@ -29,15 +29,15 @@ export const FileUpload = ({ setCsvRecords }: FileUploadProps): React.JSX.Elemen
 							// Filter out unused data and sort alphabetically
 							const filteredRecords = records.map((record: ImdbCsvRecord): CsvRecord => ({
 								directors: record.Directors.length > 0 ? record.Directors.split(',') : [],
-								genres: record.Genres.length > 0 ? record.Genres.split(',') : [],
-								imdbRating: +record['IMDb Rating'],
+								genres: record.Genres.length > 0 ? record.Genres.split(',') as Genre[] : [],
+								imdbRating: +record['IMDb Rating'] as Rating,
 								votes: +record['Num Votes'],
 								releaseDate: new Date(record['Release Date']),
 								runtime: +record['Runtime (mins)'],
 								title: record.Title,
 								type: record['Title Type'],
 								imdbUrl: record.URL,
-								userRating: +record['Your Rating']
+								userRating: +record['Your Rating'] as Rating
 							})).sort((a, b) => a.title.toLowerCase().localeCompare(b.title.toLowerCase()));
 
 							setCsvRecords(filteredRecords);

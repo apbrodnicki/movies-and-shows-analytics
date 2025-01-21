@@ -1,6 +1,6 @@
 import { ScatterChart } from '@mui/x-charts';
 import { filterCsvRecordsForScatter } from 'helper/helper';
-import type { CsvRecord } from 'models';
+import type { CsvRecord } from 'models/models';
 import React from 'react';
 
 interface RatingsVotesScatterProps {

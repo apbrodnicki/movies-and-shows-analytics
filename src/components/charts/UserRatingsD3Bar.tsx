@@ -1,5 +1,5 @@
 import * as d3 from 'd3';
-import type { CsvRecord } from 'models';
+import type { CsvRecord } from 'models/models';
 import React, { useEffect, useRef } from 'react';
 
 interface UserRatingsD3BarProps {
