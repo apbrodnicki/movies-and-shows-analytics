@@ -1,5 +1,5 @@
 import { ScatterChart } from '@mui/x-charts';
-import { filterCsvRecordsForScatter } from 'helper/helper';
+import { filterCsvRecordsForRatingsVotesScatter } from 'helper/helper';
 import type { CsvRecord } from 'models/models';
 import React from 'react';
 
@@ -8,7 +8,7 @@ interface RatingsVotesScatterProps {
 }
 
 export const RatingsVotesScatter = ({ records }: RatingsVotesScatterProps): React.JSX.Element => {
-	const scatterPoints = filterCsvRecordsForScatter(records);
+	const scatterPoints = filterCsvRecordsForRatingsVotesScatter(records);
 
 	return (
 		<ScatterChart

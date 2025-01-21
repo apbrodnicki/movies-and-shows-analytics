@@ -28,7 +28,7 @@ export type RatingFrequency = {
 	[key in Rating]: number
 };
 
-export const DefaultRatingFrequency: RatingFrequency = ({
+export const DefaultRatingFrequency: RatingFrequency = {
 	0: 0,
 	1: 0,
 	2: 0,
@@ -40,4 +40,4 @@ export const DefaultRatingFrequency: RatingFrequency = ({
 	8: 0,
 	9: 0,
 	10: 0
-});
+};

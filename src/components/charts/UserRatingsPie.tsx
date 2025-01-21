@@ -1,5 +1,5 @@
 import { PieChart } from '@mui/x-charts';
-import { filterCsvRecordsForPie } from 'helper/helper';
+import { getUserRatingsPieSlices } from 'helper/helper';
 import type { CsvRecord } from 'models/models';
 import React from 'react';
 
@@ -8,13 +8,13 @@ interface UserRatingsPieProps {
 }
 
 export const UserRatingsPie = ({ records }: UserRatingsPieProps): React.JSX.Element => {
-	const ratings = filterCsvRecordsForPie(records);
+	const pieSlices = getUserRatingsPieSlices(records);
 
 	return (
 		<PieChart
 			series={[
 				{
-					data: ratings
+					data: pieSlices
 				}
 			]}
 			width={400}

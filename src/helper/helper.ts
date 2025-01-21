@@ -1,5 +1,5 @@
-import type { PieSlice, RatingAverage, RatingsVotesScatterPoint } from 'models/chartModels';
-import type { CsvRecord, GenreFrequency, ImdbCsvRecord, RatingsOccurrences } from 'models/models';
+import { DefaultRatingFrequency, type GenreFrequency, type PieSlice, type RatingAverage, type RatingFrequency, type RatingsVotesScatterPoint } from 'models/chartModels';
+import type { CsvRecord, ImdbCsvRecord, Rating } from 'models/models';
 
 export const isImdbCsvRecordArray = (records: unknown): records is ImdbCsvRecord[] => {
 	if (!Array.isArray(records)) {
@@ -48,7 +48,7 @@ export const isImdbCsvRecordArray = (records: unknown): records is ImdbCsvRecord
 	));
 };
 
-export const filterCsvRecordsForScatter = (records: CsvRecord[]): RatingsVotesScatterPoint[] => (
+export const filterCsvRecordsForRatingsVotesScatter = (records: CsvRecord[]): RatingsVotesScatterPoint[] => (
 	records.map((record, index) => ({
 		id: index,
 		imdbRating: record.imdbRating,
@@ -59,25 +59,19 @@ export const filterCsvRecordsForScatter = (records: CsvRecord[]): RatingsVotesSc
 
 export const getDataGridRowClassName = (row: CsvRecord): string => row.type.toLocaleLowerCase().replaceAll(' ', '-');
 
-export const filterCsvRecordsForPie = (records: CsvRecord[]): PieSlice[] => {
-	const occurrences: RatingsOccurrences = { 0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0 };
-	const pie: PieSlice[] = [];
+export const getUserRatingsPieSlices = (records: CsvRecord[]): PieSlice[] => {
+	const slices: PieSlice[] = [];
+	const ratingFrequency = getRatingFrequency(records);
 
-	const ratings = records.map((record) => record.userRating);
-
-	for (const rating of ratings) {
-		occurrences[rating as keyof RatingsOccurrences] = occurrences[rating as keyof RatingsOccurrences] + 1;
-	}
-
-	for (const occurrence in occurrences) {
-		pie.push({
-			id: occurrence,
-			value: occurrences[occurrence as unknown as keyof RatingsOccurrences],
-			label: occurrence !== '0' ? `${occurrence} / 10` : 'Unrated'
+	for (const rating in ratingFrequency) {
+		slices.push({
+			id: rating,
+			value: ratingFrequency[rating as unknown as Rating],
+			label: rating !== '0' ? `${rating} / 10` : 'Unrated'
 		});
 	}
 
-	return pie;
+	return slices;
 };
 
 export const getRatingAverage = (records: CsvRecord[]): RatingAverage => {
@@ -125,4 +119,14 @@ export const getGenreFrequency = (records: CsvRecord[]): GenreFrequency => {
 
 		return accumulator;
 	}, {});
+};
+
+export const getRatingFrequency = (records: CsvRecord[]): RatingFrequency => {
+	const ratingFrequency = { ...DefaultRatingFrequency };
+
+	for (const record of records) {
+		ratingFrequency[record.userRating] = ratingFrequency[record.userRating] + 1;
+	}
+
+	return ratingFrequency;
 };
