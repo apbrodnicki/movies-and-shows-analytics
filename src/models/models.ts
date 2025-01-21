@@ -1,7 +1,7 @@
 export interface CsvRecord {
 	directors: string[],
 	genres: Genre[],
-	imdbRating: Rating,
+	imdbRating: number,
 	votes: number,
 	releaseDate: Date,
 	runtime: number,
@@ -78,21 +78,3 @@ export type Type =
 	| 'Video Game';
 
 export type Rating = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
-
-export interface RatingsOccurrences {
-	0: number,
-	1: number,
-	2: number,
-	3: number,
-	4: number,
-	5: number,
-	6: number,
-	7: number,
-	8: number,
-	9: number,
-	10: number
-}
-
-export type GenreFrequency = {
-	[key in Genre]?: number
-};

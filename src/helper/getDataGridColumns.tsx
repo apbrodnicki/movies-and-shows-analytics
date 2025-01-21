@@ -32,8 +32,8 @@ export const getDataGridColumns = (): GridColDef[] => ([
 		headerAlign: 'center',
 		flex: 1,
 		type: 'number',
-		cellClassName: (params: GridCellParams<CsvRecord, Rating>) => `rating-cell-${params.value !== 0 ? Math.floor(params.value as number) : '0'}`,
-		renderCell: (params: GridRenderCellParams<CsvRecord, Rating>) => <Typography>{params.value}</Typography>
+		cellClassName: (params: GridCellParams<CsvRecord, number>) => `rating-cell-${params.value !== 0 ? Math.floor(params.value as number) : '0'}`,
+		renderCell: (params: GridRenderCellParams<CsvRecord, number>) => <Typography>{params.value}</Typography>
 	},
 	{
 		field: 'votes',

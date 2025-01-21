@@ -30,7 +30,7 @@ export const FileUpload = ({ setCsvRecords }: FileUploadProps): React.JSX.Elemen
 							const filteredRecords = records.map((record: ImdbCsvRecord): CsvRecord => ({
 								directors: record.Directors.length > 0 ? record.Directors.split(',') : [],
 								genres: record.Genres.length > 0 ? record.Genres.split(',') as Genre[] : [],
-								imdbRating: +record['IMDb Rating'] as Rating,
+								imdbRating: +record['IMDb Rating'],
 								votes: +record['Num Votes'],
 								releaseDate: new Date(record['Release Date']),
 								runtime: +record['Runtime (mins)'],

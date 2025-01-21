@@ -1,3 +1,5 @@
+import type { Genre, Rating } from './models';
+
 export interface RatingsVotesScatterPoint {
 	id: number,
 	imdbRating: number,
@@ -17,3 +19,25 @@ export interface RatingAverage {
 	totalImdbAverage: number,
 	userAverage: number
 }
+
+export type GenreFrequency = {
+	[key in Genre]?: number
+};
+
+export type RatingFrequency = {
+	[key in Rating]: number
+};
+
+export const DefaultRatingFrequency: RatingFrequency = ({
+	0: 0,
+	1: 0,
+	2: 0,
+	3: 0,
+	4: 0,
+	5: 0,
+	6: 0,
+	7: 0,
+	8: 0,
+	9: 0,
+	10: 0
+});
